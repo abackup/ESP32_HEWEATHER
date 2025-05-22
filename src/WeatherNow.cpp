@@ -3,11 +3,12 @@ WeatherNow::WeatherNow()
 {
 }
 
-// 配置请求信息，私钥、位置、单位、语言
-void WeatherNow::config(String userKey, String location, String unit, String lang)
+// 配置请求信息，私钥、位置
+void WeatherNow::config(String API_Host, String Token, String location, String unit, String lang)
 {
-    _requserKey = userKey;
+    _reqToken = Token;
     _reqLocation = location;
+    _reqHost = API_Host;
     _reqUnit = unit;
     _reqLang = lang;
 }
@@ -16,17 +17,16 @@ void WeatherNow::config(String userKey, String location, String unit, String lan
 bool WeatherNow::get()
 {
     // https请求
-    String url = "https://n949vgkkgg.re.qweatherapi.com/v7/weather/now?location=" + _reqLocation +
-                 "&key=" + _requserKey + "&unit=" + _reqUnit + "&lang=" + _reqLang;
+    String url = "https://" + _reqHost + "/v7/weather/now?location=" + _reqLocation + "&key=" + _reqToken + "&unit=" + _reqUnit + "&lang=" + _reqLang;
     HTTPClient http;
 #ifdef DEBUG
     Serial.print("[HTTP] begin...\n");
 #endif
     if (http.begin(url))
     {
-        #ifdef DEBUG
+#ifdef DEBUG
         Serial.println("HTTPclient setUp done!");
-        #endif
+#endif
     }
 #ifdef DEBUG
     Serial.print("[HTTP] GET...\n");
@@ -53,9 +53,9 @@ bool WeatherNow::get()
             int result = ArduinoUZlib::decompress(inbuff, size, outbuf, out_size);
             String payload = String(outbuf, out_size);
             _parseNowJson(payload);
-            #ifdef DEBUG
+#ifdef DEBUG
             Serial.println(payload);
-            #endif
+#endif
         }
     }
     else
@@ -91,6 +91,12 @@ void WeatherNow::_parseNowJson(String payload)
     _now_windScale_int = now["windScale"].as<int>();   // 实况风力等级
     _now_humidity_float = now["humidity"].as<float>(); // 实况相对湿度百分比数值
     _now_precip_float = now["precip"].as<float>();     // 实况降水量,毫米
+    _now_pressure_int = now["pressure"].as<int>();     // 实况气压,百帕
+    _now_vis_int = now["vis"].as<int>();               // 实况能见度,公里
+    _now_cloud_int = now["cloud"].as<int>();           // 实况云量,百分比数值
+    _now_dew_int = now["dew"].as<int>();               // 实况露点温度
+    _now_wind360_int = now["wind360"].as<int>();
+    _now_windSpeed_int = now["windSpeed"].as<int>();
 }
 
 // API状态码
@@ -150,4 +156,34 @@ float WeatherNow::getHumidity()
 float WeatherNow::getPrecip()
 {
     return _now_precip_float;
+}
+
+int WeatherNow::getPressure()
+{
+    return _now_pressure_int;
+}
+
+int WeatherNow::getVis()
+{
+    return _now_vis_int;
+}
+
+int WeatherNow::getCloud()
+{
+    return _now_cloud_int;
+}
+
+int WeatherNow::getDew()
+{
+    return _now_dew_int;
+}
+
+int WeatherNow::getWind360()
+{
+    return _now_wind360_int;
+}
+
+int WeatherNow::getWindSpeed()
+{
+    return _now_windSpeed_int;
 }
