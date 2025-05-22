@@ -16,7 +16,7 @@ void WeatherNow::config(String userKey, String location, String unit, String lan
 bool WeatherNow::get()
 {
     // https请求
-    String url = "https://devapi.heweather.net/v7/weather/now?location=" + _reqLocation +
+    String url = "https://n949vgkkgg.re.qweatherapi.com/v7/weather/now?location=" + _reqLocation +
                  "&key=" + _requserKey + "&unit=" + _reqUnit + "&lang=" + _reqLang;
     HTTPClient http;
 #ifdef DEBUG
