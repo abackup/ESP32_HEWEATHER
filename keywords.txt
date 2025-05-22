@@ -8,7 +8,6 @@
 #######################################
 
 WeatherNow				KEYWORD1
-WeatherForecast			KEYWORD1
 AirQuality				KEYWORD1
 
 #######################################
@@ -23,8 +22,10 @@ getTemp				KEYWORD2
 getFeelLike			KEYWORD2
 getIcon				KEYWORD2
 getWeatherText		KEYWORD2
+getWind360			KEYWORD2
 getWindDir			KEYWORD2
-getWindScale		KEYWORD2
+getWindScale			KEYWORD2
+getWindSpeed		KEYWORD2
 getHumidity			KEYWORD2
 getPrecip			KEYWORD2
 getTempMax			KEYWORD2
@@ -37,3 +38,8 @@ getUvIndex			KEYWORD2
 getAqi				KEYWORD2
 getCategory			KEYWORD2
 getPrimary			KEYWORD2
+getPressure			KEYWORD2
+getVis 				KEYWORD2
+getCloud			KEYWORD2
+getDew 				KEYWORD2
+ 
