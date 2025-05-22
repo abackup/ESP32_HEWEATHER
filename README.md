@@ -5,7 +5,6 @@
   * [准备工作](#准备工作)
   * [使用说明](#使用说明)
     + [获取实时天气信息](#获取实时天气信息)
-    + [获取天气预报信息](#获取天气预报信息)
     + [获取空气质量信息](#获取空气质量信息)
 
 ## 基本介绍
@@ -69,27 +68,6 @@ weatherNow.getWindScale();     // 获取实况风力等级
 weatherNow.getHumidity();      // 获取实况相对湿度百分比数值
 weatherNow.getPrecip();        // 获取实况降水量,毫米
   ```
-
-
-
-### 获取天气预报信息
-
-```c++
-WeatherForecast WeatherForecast;    // 建立WeatherForecast对象
-WeatherForecast.config(UserKey, Location, Unit, Lang); // 配置请求信息
-WeatherForecast.getServerCode();    // 获取API状态码
-WeatherForecast.getLastUpdate();    // 获取服务器更新天气信息时间
-// 以下i取值为 0,1,2，分别代表今天，明天和后天
-WeatherForecast.getTempMax(i);      // 获取最高温度
-WeatherForecast.getTempMin(i);      // 获取最低温度
-WeatherForecast.getIconDay(i);      // 获取天气图标代码
-WeatherForecast.getTextDay(i);      // 获取天气状况的文字描述
-WeatherForecast.getWindDirDay(i);   // 获取风向
-WeatherForecast.getwindScaleDay(i); // 获取风力等级
-WeatherForecast.getHumidity(i);     // 获取相对湿度百分比数值
-WeatherForecast.getPrecip(i);       // 获取降水量,毫米
-WeatherForecast.getUvIndex(i);      // 获取紫外线强度指数
-```
 
 
 
