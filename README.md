@@ -5,11 +5,11 @@
   * [准备工作](#准备工作)
   * [使用说明](#使用说明)
     + [获取实时天气信息](#获取实时天气信息)
-    + [获取空气质量信息](#获取空气质量信息)
+    + [获取实时空气质量信息](#获取实时空气质量信息)
 
 ## 基本介绍
 
-**Arduino**开发平台使用**ESP32**获取**和风天气**的第三方库。
+**Arduino**开发平台使用**ESP32**获取**和风天气**的第三方库（原地址：[ye-zhang0720](https://github.com/ye-zhang0720/ESP32_HEWEATHER)），更新了和风 API v7.15。
 
 
 
@@ -18,27 +18,28 @@
 > 注：
 >
 > - 由于信息的安全性要求不高，故HTTPS请求中设置了不进行身份校验；
-> - 只涉及常人经常关注的信息如`温度`、`风力`、`降雨`等，其它一般人不关注的信息如`露点温度`等并未解析；
+> - 只涉及常人经常关注的信息如`温度`、`风力`、`控制质量`等。
 
 
 
 ## 准备工作
 
-1. 注册和风天气并获得key，详见 https://dev.heweather.com/docs/start/get-api-key；
+1. 注册和风天气并获得key，详见 https://console.qweather.com/project/492FYDNDMB?lang=zh；
 
 2. 安装ESP32扩展程序
 
-3. 安装**ArduinoJson**库，详见 https://github.com/bblanchon/ArduinoJson；
+3. 安装**ArduinoJson**库，详见 https://docs.arduino.cc/libraries/arduinojson/；
+   安装**ArduinoUZlib**库，详见 https://github.com/tignioj/ArduinoUZlib/;
 
 	其他说明：
 
-	- 私钥获取 https://dev.heweather.com/docs/start/get-api-key；
+	- 私钥获取 https://console.qweather.com/project/492FYDNDMB?lang=zh；
 
 	- 城市代码 https://github.com/heweather/LocationList
 
 		excel表 `Location_ID`，亦可通过[城市搜索](https://dev.heweather.com/docs/api/geo)获取 ；
 
-	- 和风天气开发者**官方文档**：https://dev.heweather.com/；
+	- 和风天气开发者**官方文档**：https://dev.qweather.com/docs/start/；
 
 ## 使用说明
 
@@ -56,33 +57,42 @@
 
   ```c++
 WeatherNow weatherNow;         // 建立weatherNow对象
-weatherNow.config(UserKey, Location, Unit, Lang); // 配置请求信息
+weatherNow.config(API_Host, Token, Location, Unit, Lang); // 配置请求信息
 weatherNow.getServerCode();    // 获取API状态码   
 weatherNow.getLastUpdate();    // 获取服务器更新天气信息时间
 weatherNow.getTemp();          // 获取实况温度
 weatherNow.getFeelLike();      // 获取实况体感温度
 weatherNow.getIcon();          // 获取当前天气图标代码
 weatherNow.getWeatherText();   // 获取实况天气状况的文字描述
+weatherNow.getWind360();
 weatherNow.getWindDir();       // 获取实况风向
 weatherNow.getWindScale();     // 获取实况风力等级
 weatherNow.getHumidity();      // 获取实况相对湿度百分比数值
 weatherNow.getPrecip();        // 获取实况降水量,毫米
+weatherNow.getPressure();
+weatherNow.getVis();
+weatherNow.getCloud();
+weatherNow.getDew();
   ```
 
 
 
-### 获取空气质量信息
+### 获取实时空气质量信息
 
 ```c++
-AirQuality AirQuality;           // 建立AirQuality对象
-AirQuality.config(UserKey, Location, Unit, Lang); // 配置请求信息
-WeatherForecast.getServerCode(); // 获取API状态码
-WeatherForecast.getLastUpdate(); // 获取服务器更新天气信息时间
-AirQuality.getServerCode();      // 获取API状态码
-AirQuality.getLastUpdate();      // 获取服务器更新天气信息时间
-AirQuality.getAqi();             // 实时空气质量指数
-AirQuality.getCategory();        // 实时空气质量指数级别
-AirQuality.getPrimary();         // 实时空气质量的主要污染物，优时返回值为NA
+AirQuality airQuality;           // 建立airQuality对象
+airQuality.config(API_Host, Token, Location, Lang); // 配置请求信息
+airQualityir.getServerCode();      // 获取API状态码
+airQualityir.getLastUpdate();      // 获取服务器更新天气信息时间
+airQualityir.getAqi();             // 实时空气质量指数
+airQualityir.getCategory();        // 实时空气质量指数级别
+airQualityir.getPrimary();         // 实时空气质量的主要污染物，优时返回值为NA
+airQualityir.getPm10();
+airQualityir.getPm2p5();
+airQualityir.getNo2();
+airQualityir.getSo2();
+airQualityir.getCo();
+airQualityir.getO3();
 ```
 
 
