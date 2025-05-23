@@ -24,12 +24,12 @@
 
 ## 准备工作
 
-1. 注册和风天气并获得key，详见 https://console.qweather.com/project/492FYDNDMB?lang=zh；
+1. 注册和风天气并获得key，详见 https://console.qweather.com/project/492FYDNDMB?lang=zh ；
 
 2. 安装ESP32扩展程序
 
-3. 安装**ArduinoJson**库，详见 https://docs.arduino.cc/libraries/arduinojson/；
-   安装**ArduinoUZlib**库，详见 https://github.com/tignioj/ArduinoUZlib/;
+3. 安装**ArduinoJson**库，详见 https://docs.arduino.cc/libraries/arduinojson/ ；
+   安装**ArduinoUZlib**库，详见 https://github.com/tignioj/ArduinoUZlib/ ;
 
 	其他说明：
 
@@ -39,7 +39,7 @@
 
 		excel表 `Location_ID`，亦可通过[城市搜索](https://dev.heweather.com/docs/api/geo)获取 ；
 
-	- 和风天气开发者**官方文档**：https://dev.qweather.com/docs/start/；
+	- 和风天气开发者**官方文档**：https://dev.qweather.com/docs/start/ ；
 
 ## 使用说明
 
