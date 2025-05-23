@@ -16,8 +16,8 @@ AirQuality				KEYWORD1
 ESP32_Heweather	KEYWORD2
 config				KEYWORD2
 get					KEYWORD2
-getServerCode		KEYWORD2
-getLastUpdate		KEYWORD2
+getServerCode			KEYWORD2
+getLastUpdate			KEYWORD2
 getTemp				KEYWORD2
 getFeelLike			KEYWORD2
 getIcon				KEYWORD2
@@ -25,9 +25,9 @@ getWeatherText		KEYWORD2
 getWind360			KEYWORD2
 getWindDir			KEYWORD2
 getWindScale			KEYWORD2
-getWindSpeed		KEYWORD2
+getWindSpeed			KEYWORD2
 getHumidity			KEYWORD2
-getPrecip			KEYWORD2
+getPrecip				KEYWORD2
 getTempMax			KEYWORD2
 getTempMin			KEYWORD2
 getIconDay			KEYWORD2
@@ -40,6 +40,15 @@ getCategory			KEYWORD2
 getPrimary			KEYWORD2
 getPressure			KEYWORD2
 getVis 				KEYWORD2
-getCloud			KEYWORD2
+getCloud				KEYWORD2
 getDew 				KEYWORD2
+getAqi 				KEYWORD2
+getPm10 				KEYWORD2
+getPm2p5 			KEYWORD2
+getNo2 				KEYWORD2
+getSo2 				KEYWORD2
+getCo 				KEYWORD2
+getO3 				KEYWORD2
+
+
  
