@@ -1,15 +1,14 @@
 #include "AirQuality.h"
-
 AirQuality::AirQuality()
 {
 }
 
-// 配置请求信息，私钥、位置、单位、语言
-void AirQuality::config(String userKey, String location, String unit, String lang)
+// 配置请求信息，私钥、位置
+void AirQuality::config(String API_Host, String Token, String location,  String lang)
 {
-    _requserKey = userKey;
+    _reqToken = Token;
     _reqLocation = location;
-    _reqUnit = unit;
+    _reqHost = API_Host;
     _reqLang = lang;
 }
 
@@ -17,27 +16,23 @@ void AirQuality::config(String userKey, String location, String unit, String lan
 bool AirQuality::get()
 {
     // https请求
-
-#ifdef DEBUG
-    Serial.print("[HTTPS] begin...\n");
-#endif
-    String url = "https://devapi.heweather.net/v7/air/now?location=" + _reqLocation +
-                 "&key=" + _requserKey + "&unit=" + _reqUnit + "&lang=" + _reqLang;
+    String url = "https://" + _reqHost + "/v7/air/now?location=" + _reqLocation + "&key=" + _reqToken  + "&lang=" + _reqLang;
     HTTPClient http;
 #ifdef DEBUG
     Serial.print("[HTTP] begin...\n");
 #endif
     if (http.begin(url))
     {
-        #ifdef DEBUG
+#ifdef DEBUG
         Serial.println("HTTPclient setUp done!");
-        #endif
+#endif
     }
 #ifdef DEBUG
     Serial.print("[HTTP] GET...\n");
 #endif
     // start connection and send HTTP header
     int httpCode = http.GET();
+
     // httpCode will be negative on error
     if (httpCode > 0)
     {
@@ -57,9 +52,9 @@ bool AirQuality::get()
             int result = ArduinoUZlib::decompress(inbuff, size, outbuf, out_size);
             String payload = String(outbuf, out_size);
             _parseNowJson(payload);
-            #ifdef DEBUG
+#ifdef DEBUG
             Serial.println(payload);
-            #endif
+#endif
         }
     }
     else
@@ -77,20 +72,25 @@ bool AirQuality::get()
 // 解析Json信息
 void AirQuality::_parseNowJson(String payload)
 {
-    const size_t capacity = 2 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(10) + 250;
+    const size_t capacity = 2 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(5) +
+                            JSON_OBJECT_SIZE(15) + 350;
     DynamicJsonDocument doc(capacity);
 
     deserializeJson(doc, payload);
 
-    const char *code = doc["code"];
-    const char *updateTime = doc["updateTime"];
     JsonObject now = doc["now"];
 
     _response_code = doc["code"].as<String>();         // API状态码
     _last_update_str = doc["updateTime"].as<String>(); // 当前API最近更新时间
-    _now_aqi_int = now["aqi"].as<int>();               // 实时空气质量指数
-    _now_category_str = now["category"].as<String>();  // 实时空气质量指数级别
-    _now_primary_str = now["primary"].as<String>();    // 实时空气质量的主要污染物，优时返回 NA
+    _now_aqi_int = now["aqi"].as<int>();             // 实况Aqi
+    _now_category_str = now["category"].as<String>();  // 实况Category
+    _now_pm10_int = now["pm10"].as<int>();             // 当前Pm10
+    _now_pm2p5_int = now["pm2p5"].as<int>();   // 实况Pm2p5
+    _now_no2_int = now["no2"].as<int>();     // 实况No2
+    _now_so2_int = now["so2"].as<int>();               // 实况So2
+    _now_co_float = now["co"].as<float>();     // 实况Co
+    _now_o3_int = now["o3"].as<int>();           // 实况O3
+
 }
 
 // API状态码
@@ -105,20 +105,48 @@ String AirQuality::getLastUpdate()
     return _last_update_str;
 }
 
-// 实时空气质量指数
-int AirQuality::getAqi()
-{
-    return _now_aqi_int;
-}
-
-// 实时空气质量指数级别
 String AirQuality::getCategory()
 {
     return _now_category_str;
 }
 
-// 实时空气质量的主要污染物，空气质量为优时，返回值为NA
-String AirQuality::getPrimary()
+//
+int AirQuality::getAqi()
 {
-    return _now_primary_str;
+    return _now_aqi_int;
+}
+
+//
+int AirQuality::getPm10()
+{
+    return _now_pm10_int;
+}
+
+// 
+int AirQuality::getPm2p5()
+{
+    return _now_pm2p5_int;
+}
+
+// 实况No2
+int AirQuality::getNo2()
+{
+    return _now_no2_int;
+}
+
+int AirQuality::getSo2()
+{
+    return _now_so2_int;
+}
+
+// 实况Co
+float AirQuality::getCo()
+{
+    return _now_co_float;
+}
+
+
+int AirQuality::getO3()
+{
+    return _now_o3_int;
 }
