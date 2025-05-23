@@ -3,9 +3,9 @@
 const char *ssid = "SSID";     // WiFi名称
 const char *passwd = "PASSWORD"; // WiFi密码
 
-String Token = "******c21f7c4e63a03dcb2ec0af98bc"; // api-key
-String Location = "1011901**";                     //城市id
-String API_Host = "******kkgg.re.qweatherapi.com";   //API_Host
+String Token = "********1f7c4e63a03dcb2ec0af98bc"; // api-key
+String Location = "10119****";                     //
+String API_Host = "********gg.re.qweatherapi.com";
 String Unit = "m";  // 公制-m/英制-i
 String Lang = "en"; // 语言 英文-en/中文-zh
 float ROUND = 1.5;  // 更新间隔<分钟>实时天气API 10~20分钟更新一次
