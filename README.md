@@ -24,16 +24,16 @@
 
 ## 准备工作
 
-1. 注册和风天气并获得key，详见 https://console.qweather.com/project/492FYDNDMB?lang=zh  ；
+1. 注册和风天气并到控制台获得key，详见 https://console.qweather.com/ ；
 
 2. 安装ESP32扩展程序
 
-3. 安装**ArduinoJson**库，详见 https://docs.arduino.cc/libraries/arduinojson/  ；
-   安装**ArduinoUZlib**库，详见 https://github.com/tignioj/ArduinoUZlib/  ;
+3. 安装**ArduinoJson**库，详见 [arduinojson](https://github.com/bblanchon/ArduinoJson) ；
+   安装**ArduinoUZlib**库，详见 [ArduinoUZlib](https://github.com/tignioj/ArduinoUZlib) ;
 
 	其他说明：
 
-	- 私钥获取 https://console.qweather.com/project/492FYDNDMB?lang=zh  ；
+	- 私钥获取 https://console.qweather.com/p ；
 
 	- 城市代码 https://github.com/heweather/LocationList
 
