@@ -73,10 +73,11 @@ bool WeatherNow::get()
 // 解析Json信息
 void WeatherNow::_parseNowJson(String payload)
 {
-    const size_t capacity = 2 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(5) +
-                            JSON_OBJECT_SIZE(15) + 350;
-    DynamicJsonDocument doc(capacity);
-
+//    const size_t capacity = 2 * JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(5) +
+//                            JSON_OBJECT_SIZE(15) + 350;
+//    DynamicJsonDocument doc(capacity);
+    JsonDocument doc;
+    
     deserializeJson(doc, payload);
 
     JsonObject now = doc["now"];
