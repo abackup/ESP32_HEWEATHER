@@ -37,7 +37,7 @@
 
 	- 城市代码 https://github.com/heweather/LocationList
 
-		excel表 `Location_ID`，亦可通过[城市搜索](https://dev.heweather.com/docs/api/geo)获取 ；
+		excel表 `Location_ID`，亦可通过[城市搜索](https://github.com/qwd/LocationList/blob/master/China-City-List-latest.csv)获取 ；
 
 	- 和风天气开发者**官方文档**：https://dev.qweather.com/docs/start/  ；
 
